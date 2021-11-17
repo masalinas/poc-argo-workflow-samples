@@ -1,0 +1,38 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: biometric-workflow-
+spec:
+  entrypoint: biometric-workflow
+      
+  templates:
+  - name: biometric-workflow
+    steps:
+    - - name: biometric-import
+        template: biometric-import
+    - - name: biometric-parser
+        template: biometric-parser
+        arguments:
+          artifacts:
+          - name: biometric-data
+            from: "{{steps.biometric-import.outputs.artifacts.biometric-data}}"
+
+  - name: biometric-import
+    container:
+      image:  masalinasgancedo/biometric-import
+      command: [python3]
+      args: ["import.py"] 
+    outputs:
+      artifacts:
+      - name: biometric-data
+        path: /app/gas.csv
+
+  - name: biometric-parser
+    inputs:
+      artifacts:
+      - name: biometric-data
+        path: /app/gas.csv
+    container:
+      image:  masalinasgancedo/biometric-parser
+      command: [python3]
+      args: ["parser.py", "gas.csv"]

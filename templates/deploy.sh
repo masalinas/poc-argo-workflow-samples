@@ -1,0 +1,1 @@
+argo -n argo submit --watch biometric-workflow.yaml
