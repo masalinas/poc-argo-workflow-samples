@@ -140,3 +140,7 @@ Pods created by Poc Argo Workflow in Kubernetes
 Minio Bucket folders created by the PoC Argo Workflow
 
 ![Minio Bucket](captures/minio-bucket.png "Minio Bucket")
+
+Sample persisted in MongoDB
+
+![Sample persisted](captures/database-persist.png "Sample persisted")
