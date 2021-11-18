@@ -126,13 +126,16 @@ client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
 argo -n argo submit --watch poc-workflow.yam
 ```
 
-Pods created by Poc Woekflow in Kubernetes
-
-![Kubernetes Pods](captures/pods-flow.png "Kubernetes Pods")
-
 Argo Workflow executed
 
 ![PoC Workflow](captures/poc-flow.png "PoC Workflow")
+
+Docker Hubs Containers
+![Dockerhub Containers](captures/dockerhub-containers.png "Dockerhub Containers")
+
+Pods created by Poc Woekflow in Kubernetes
+
+![Kubernetes Pods](captures/pods-flow.png "Kubernetes Pods")
 
 Minio Bucket folders created by the PoC Workflow
 
