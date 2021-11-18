@@ -1,5 +1,5 @@
 # Description
-Argos Workflow PoC based on Python templates
+Argo Workflow PoC based on Python templates
 
 # Install and start Minikube
 
@@ -19,20 +19,20 @@ sudo install -o root -g root -m 0755 kubectl /usr/local/bin/kubectl
 kubectl version --client
 ```
 
-# Install Argos Workflow in Kubernetes
+# Install Argo Workflow in Kubernetes
 
 ```shell
 kubectl create ns argo
 kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflows/master/manifests/quick-start-postgres.yaml
 ```
 
-![Deployment](captures/deployments.png "ArgosFlow Deployments")
+![Deployment](captures/deployments.png "ArgoFlow Deployments")
 
-# Install Argos Workflow CLI
+# Install Argo Workflow CLI
 
-From Argos WorkFlow Dashboard we could download the CLI
+From Argo WorkFlow Dashboard we could download the CLI
 
-![ArgosFlow CLI](captures/argos-cli.png "ArgosFlow CLI")
+![ArgoFlow CLI](captures/argo-cli.png "ArgoFlow CLI")
 
 The install binary
 
@@ -49,7 +49,7 @@ argo version
 ```
 
 chmod +z 
-# Access to Argos Workflow dashboard
+# Access to Argo Workflow dashboard
 
 Make a port-fordward of the argo-server port like this
 
@@ -57,13 +57,13 @@ Make a port-fordward of the argo-server port like this
 kubectl -n argo port-forward deployment/argo-server 2746:2746
 ```
 
-Open Argos Workflow dashboard Uri:
+Open Argo Workflow dashboard Uri:
 
 ```shell
 http://localhost:2746
 ```
 
-![ArgosWorkflow UI](captures/argoworkflow-ui.png "ArgosWorkflow UI")
+![Argo Workflow UI](captures/argoworkflow-ui.png "Argo Workflow UI")
 
 # Access to Minio artifact repository
 
@@ -81,7 +81,7 @@ kubectl -n argo port-forward deployment/minio 9000:43449
 kubectl -n argo port-forward deployment/minio 9001:9000
 ```
 
-Get Minio default credentials from Argos Workflow Minio secrets
+Get Minio default credentials from Argo Workflow Minio secrets
 
 ![Minio Credentials](captures/minio-credentials.png "Minio Credentials")
 
@@ -93,8 +93,8 @@ http://localhost:9000
 
 ![Minio Dashboard](captures/minio-dashboard.png "Minio Dashboard")
 
-# Argos Workflow artifact repository configuration
+# Argo Workflow artifact repository configuration
 
-By default Argos Workflow used a S3 repository like artifact repository and the configuration is saved on the kubernetes config map called workflow-controller-configmap in the attribute called artifactRepository like this
+By default Argo Workflow used a S3 repository like artifact repository and the configuration is saved on the kubernetes config map called workflow-controller-configmap in the attribute called artifactRepository like this
 
-![Repository Configuration](captures/artifact-config.png "Argos Workflow Artifact Repository Configuration")
+![Repository Configuration](captures/artifact-config.png "Argo Workflow Artifact Repository Configuration")
