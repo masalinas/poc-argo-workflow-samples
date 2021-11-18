@@ -67,7 +67,7 @@ http://localhost:2746
 
 # Access to Minio artifact repository
 
-We could get open ports of Minio from Pod logs:
+We could get Argo Workflow open ports from Minio Pod logs. Minio export two ports:
 
 - Port 9000 is the Minio API Port
 - Port 43449 is the Minio Console or Dashboard
