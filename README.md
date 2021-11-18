@@ -119,3 +119,9 @@ else:
 # upload sample data to bucket
 client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
 ```
+
+# Deploy Argo Worlflow Templates
+
+```Shell
+argo -n argo submit --watch poc-workflow.yam
+```
