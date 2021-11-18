@@ -1,8 +1,8 @@
 # compile images and publish
-docker build -t masalinasgancedo/biometric-import .
+docker build -t masalinasgancedo/poc-import .
 
 # run a docker from image
-docker run masalinasgancedo/biometric-import
+docker run masalinasgancedo/poc-import
 
 # puslish images on docker hub
-docker push masalinasgancedo/biometric-import
+docker push masalinasgancedo/poc-import

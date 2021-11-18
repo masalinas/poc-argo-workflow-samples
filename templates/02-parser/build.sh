@@ -1,8 +1,8 @@
 # compile images and publish
-docker build -t masalinasgancedo/biometric-parser .
+docker build -t masalinasgancedo/poc-parser .
 
 # run a docker from image
-docker run masalinasgancedo/biometric-parser
+docker run masalinasgancedo/poc-parser
 
 # puslish images on docker hub
-docker push masalinasgancedo/biometric-parser
+docker push masalinasgancedo/poc-parser

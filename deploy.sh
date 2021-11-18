@@ -1,1 +1,1 @@
-argo -n argo submit --watch biometric-workflow.yaml
+argo -n argo submit --watch poc-workflow.yaml

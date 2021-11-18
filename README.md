@@ -69,7 +69,7 @@ http://localhost:2746
 
 We could get Argo Workflow open ports from Minio Pod logs. Minio export two ports:
 
-- Port 43449 is the Minio Console or Dashboard
+- Port 43449 is the Minio Console or Dashboard (Be caregul this port change when start Minikube so we must check it form Minio Pod Logs before)
 - Port 9000 is the Minio API Port
 
 ![Minio Logs](captures/minio-logs.png "Minio Logs")
@@ -125,3 +125,5 @@ client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
 ```Shell
 argo -n argo submit --watch poc-workflow.yam
 ```
+
+![PoC Workflow](captures/poc-flow.png "PoC Workflow")
