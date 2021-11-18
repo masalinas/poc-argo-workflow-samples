@@ -69,7 +69,7 @@ http://localhost:2746
 
 We could get Argo Workflow open ports from Minio Pod logs. Minio export two ports:
 
-- Port 43449 is the Minio Console or Dashboard (Be caregul this port change when start Minikube so we must check it form Minio Pod Logs before)
+- Port 43449 is the Minio Console or Dashboard (Be careful this port change when start Minikube so we must check it from Minio Pod Logs before)
 - Port 9000 is the Minio API Port
 
 ![Minio Logs](captures/minio-logs.png "Minio Logs")
