@@ -1,5 +1,5 @@
 # Description
-Biometric ArgosWorkflow based on qiime2
+Argos Workflow PoC based on Python templates
 
 # Install minikube
 
