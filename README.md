@@ -69,8 +69,8 @@ http://localhost:2746
 
 We could get Argo Workflow open ports from Minio Pod logs. Minio export two ports:
 
-- Port 9000 is the Minio API Port
 - Port 43449 is the Minio Console or Dashboard
+- Port 9000 is the Minio API Port
 
 ![Minio Logs](captures/minio-logs.png "Minio Logs")
 
@@ -98,3 +98,24 @@ http://localhost:9000
 By default Argo Workflow used a S3 repository like artifact repository and the configuration is saved on the kubernetes config map called workflow-controller-configmap in the attribute called artifactRepository like this
 
 ![Repository Configuration](captures/artifact-config.png "Argo Workflow Artifact Repository Configuration")
+
+If you want upload any file to Minio outside Kubernetes using Python we could use minio python package and the default Argo Workflow minio bucket
+
+```Python
+ARGO_BUCKET = "my-bucket"
+DATA_FILENAME: "gas.csv"
+
+# Connect to Minio in insecure mode using default Argo Workflow Minio credentials
+client = Minio("localhost:9001", access_key="admin", secret_key="password", secure=False) 
+
+# Make 'my-bucket' bucket if not exist.
+found = client.bucket_exists(ARGO_BUCKET)
+
+if not found:
+    client.make_bucket(ARGO_BUCKET)
+else:
+    print("Bucket " + ARGO_BUCKET + " already exists")
+
+# upload sample data to bucket
+client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
+```
