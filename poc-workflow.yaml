@@ -1,38 +1,38 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: biometric-workflow-
+  generateName: poc-workflow-
 spec:
-  entrypoint: biometric-workflow
+  entrypoint: poc-workflow
       
   templates:
-  - name: biometric-workflow
+  - name: poc-workflow
     steps:
-    - - name: biometric-import
-        template: biometric-import
-    - - name: biometric-parser
-        template: biometric-parser
+    - - name: poc-import
+        template: poc-import
+    - - name: poc-parser
+        template: poc-parser
         arguments:
           artifacts:
-          - name: biometric-data
-            from: "{{steps.biometric-import.outputs.artifacts.biometric-data}}"
+          - name: poc-data
+            from: "{{steps.poc-import.outputs.artifacts.poc-data}}"
 
-  - name: biometric-import
+  - name: poc-import
     container:
-      image:  masalinasgancedo/biometric-import
+      image:  masalinasgancedo/poc-import
       command: [python3]
       args: ["import.py"] 
     outputs:
       artifacts:
-      - name: biometric-data
+      - name: poc-data
         path: /app/gas.csv
 
-  - name: biometric-parser
+  - name: poc-parser
     inputs:
       artifacts:
-      - name: biometric-data
+      - name: poc-data
         path: /app/gas.csv
     container:
-      image:  masalinasgancedo/biometric-parser
+      image:  masalinasgancedo/poc-parser
       command: [python3]
       args: ["parser.py", "gas.csv"]
