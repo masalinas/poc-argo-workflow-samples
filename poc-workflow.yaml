@@ -16,6 +16,12 @@ spec:
           artifacts:
           - name: dataset-csv
             from: "{{steps.poc-import.outputs.artifacts.dataset-csv}}"
+    - - name: poc-persist
+        template: poc-persist
+        arguments:
+          artifacts:
+          - name: dataset-json
+            from: "{{steps.poc-parser.outputs.artifacts.dataset-json}}"
 
   - name: poc-import
     container:
@@ -39,4 +45,14 @@ spec:
     outputs:
       artifacts:
       - name: dataset-json
-        path: /app/covid-19.json      
+        path: /app/covid-19.json
+
+  - name: poc-persist
+    inputs:
+      artifacts:
+      - name: dataset-json
+        path: /app/covid-19.json
+    container:
+      image:  masalinasgancedo/poc-persist
+      command: [python3]
+      args: ["persist.py", "covid-19.json"]        

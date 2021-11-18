@@ -3,14 +3,14 @@ import json
 
 from csv import DictReader
 
-def parser(sample_csv, sample_json):    
+def parser(csvDataset, jsonDataset):    
     # read csv dataset
-    with open(sample_csv, 'r') as csvFile:                
+    with open(csvDataset, 'r') as csvFile:                
         fieldnames = ("Date","iso3","CountryName","lat","lon","CumulativePositive","CumulativeDeceased","CumulativeRecovered","CurrentlyPositive","Hospitalized","IntensiveCare","EUcountry","EUCPMcountry","NUTS")
         csvReader = DictReader(csvFile, fieldnames)
 
         #convert csv dataset to json one
-        with open(sample_json, 'w') as jsonFile: 
+        with open(jsonDataset, 'w') as jsonFile: 
             jsonFile.write(json.dumps(list(csvReader)))
              
 if __name__ == '__main__':
