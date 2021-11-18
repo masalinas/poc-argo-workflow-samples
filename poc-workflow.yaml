@@ -14,8 +14,8 @@ spec:
         template: poc-parser
         arguments:
           artifacts:
-          - name: poc-data
-            from: "{{steps.poc-import.outputs.artifacts.poc-data}}"
+          - name: dataset-csv
+            from: "{{steps.poc-import.outputs.artifacts.dataset-csv}}"
 
   - name: poc-import
     container:
@@ -24,15 +24,19 @@ spec:
       args: ["import.py"] 
     outputs:
       artifacts:
-      - name: poc-data
-        path: /app/gas.csv
+      - name: dataset-csv
+        path: /app/covid-19.csv
 
   - name: poc-parser
     inputs:
       artifacts:
-      - name: poc-data
-        path: /app/gas.csv
+      - name: dataset-csv
+        path: /app/covid-19.csv
     container:
       image:  masalinasgancedo/poc-parser
       command: [python3]
-      args: ["parser.py", "gas.csv"]
+      args: ["parser.py", "covid-19.csv"]
+    outputs:
+      artifacts:
+      - name: dataset-json
+        path: /app/covid-19.json      

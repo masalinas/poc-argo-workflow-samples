@@ -1,19 +1,18 @@
 import requests
 
-DATA_URL = "https://geoportalgasolineras.es/downloadReportPlanes"
-DATA_PARM = {"extension": "CSV"}
-DATA_FILENAME = "gas.csv"
+DATA_URL = "https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
+DATA_FILENAME = "covid-19.csv"
 
-def getResource():
-    # get sample open data
-    file = requests.get(DATA_URL, DATA_PARM)
+def getDataset():
+    # get dataset
+    file = requests.get(DATA_URL)    
 
-    # save sample data
+    # save dataset
     with open(DATA_FILENAME, "wb") as f:        
         f.write(file.content)
 
 if __name__ == "__main__":
     try:
-        getResource()
+        getDataset()
     except BaseException as exc:
-        print("error download sample data.", exc)
+        print("error download dataset.", exc)
