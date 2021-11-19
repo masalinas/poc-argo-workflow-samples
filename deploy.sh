@@ -1,1 +1,1 @@
-argo -n argo submit --watch poc-workflow.yaml
+argo -n argo submit --watch poc-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"

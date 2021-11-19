@@ -4,12 +4,19 @@ metadata:
   generateName: poc-workflow-
 spec:
   entrypoint: poc-workflow
-      
+  arguments:
+    parameters:
+    - name: dataset-source
+
   templates:
   - name: poc-workflow
     steps:
     - - name: poc-import
         template: poc-import
+        arguments:
+          parameters:
+          - name: dataset-source
+            value: "{{workflow.parameters.dataset-source}}"        
     - - name: poc-parser
         template: poc-parser
         arguments:
@@ -24,10 +31,13 @@ spec:
             from: "{{steps.poc-parser.outputs.artifacts.dataset-json}}"
 
   - name: poc-import
+    inputs:
+      parameters:
+      - name: dataset-source
     container:
       image:  masalinasgancedo/poc-import
       command: [python3]
-      args: ["import.py"] 
+      args: ["import.py", "{{inputs.parameters.dataset-source}}"] 
     outputs:
       artifacts:
       - name: dataset-csv

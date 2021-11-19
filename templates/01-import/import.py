@@ -1,11 +1,11 @@
+import sys
 import requests
 
-DATA_URL = "https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
 DATA_FILENAME = "covid-19.csv"
 
-def getDataset():
+def getDataset(dataSource):
     # get dataset
-    file = requests.get(DATA_URL)    
+    file = requests.get(dataSource)
 
     # save dataset
     with open(DATA_FILENAME, "wb") as f:        
@@ -13,6 +13,6 @@ def getDataset():
 
 if __name__ == "__main__":
     try:
-        getDataset()
+        getDataset(sys.argv[1])
     except BaseException as exc:
         print("error download dataset.", exc)

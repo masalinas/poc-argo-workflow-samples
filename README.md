@@ -122,8 +122,9 @@ client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
 
 # Deploy Argo Worlflow Templates
 
+To execute the Workflow we must to pass a paramater called dataset-source where the obtain the data to we executed by the workflow
 ```Shell
-argo -n argo submit --watch poc-workflow.yam
+argo -n argo submit --watch poc-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
 ```
 
 Argo Workflow executed
