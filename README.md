@@ -138,7 +138,7 @@ Using argo workflow volume architecture
 argo -n argo submit --watch poc-volume-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
 ```
 
-Docker Hubs Containers
+Docker Hubs Argo Workflow Template Containers
 
 ![Dockerhub Containers](captures/dockerhub-containers.png "Dockerhub Containers")
 
