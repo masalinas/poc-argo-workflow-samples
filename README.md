@@ -3,7 +3,7 @@ Argo Workflow PoC based on Python templates.
 
 We resolve the PoC following two architecture modes:
 
-- Pass data between templates, using argo artifacts, creating folders inside artifact repository in Minio. 
+- Pass data between artifacts, creating folders inside artifact repository in Minio. 
 - Pass data between ephemeral VolumeClaimTemplates attached to all templates
 
 # Install and start Minikube
