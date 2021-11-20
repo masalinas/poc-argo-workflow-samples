@@ -1,7 +1,10 @@
 # Description
 Argo Workflow PoC based on Python templates. 
 
-The architecture followed is pass data between templates, using argo artifacts, creating folders inside artifact repository in Minio. Other architecture could be using ephemeral VolumeClaimTemplates attached to all templates, [go to](https://sourcegraph.com/github.com/argoproj/argo-workflows/-/blob/examples/volumes-pvc.yaml?L23:15) to see some examples
+We resolve the PoC following two architecture modes:
+
+- Pass data between templates, using argo artifacts, creating folders inside artifact repository in Minio. 
+- Pass data between ephemeral VolumeClaimTemplates attached to all templates
 
 # Install and start Minikube
 
@@ -126,7 +129,13 @@ client.fput_object(ARGO_BUCKET, DATA_FILENAME, DATA_FILENAME)
 
 To execute the Workflow we must to pass a paramater called dataset-source where the obtain the data to we executed by the workflow
 ```Shell
-argo -n argo submit --watch poc-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
+Using argo workflow artifact architecture
+
+argo -n argo submit --watch poc-artifact-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
+
+Using argo workflow volume architecture
+
+argo -n argo submit --watch poc-volume-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
 ```
 
 Argo Workflow executed
@@ -134,6 +143,7 @@ Argo Workflow executed
 ![PoC Workflow](captures/poc-flow.png "PoC Workflow")
 
 Docker Hubs Containers
+
 ![Dockerhub Containers](captures/dockerhub-containers.png "Dockerhub Containers")
 
 Pods created by Poc Argo Workflow in Kubernetes

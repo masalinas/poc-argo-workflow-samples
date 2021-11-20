@@ -1,0 +1,68 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Workflow
+metadata:
+  generateName: poc-volume-workflow-
+spec:
+  entrypoint: poc-volume-workflow
+  podGC:
+    # Pod GC strategy must be one of the following:
+    # * OnPodCompletion - delete pods immediately when pod is completed (including errors/failures)
+    # * OnPodSuccess - delete pods immediately when pod is successful
+    # * OnWorkflowCompletion - delete pods when workflow is completed
+    # * OnWorkflowSuccess - delete pods when workflow is successful
+    strategy: OnWorkflowSuccess  
+  arguments:
+    parameters:
+    - name: dataset-source
+  volumeClaimTemplates:
+  - metadata:
+      name: dataset-workdir
+    spec:
+      accessModes: [ "ReadWriteOnce" ]
+      resources:
+        requests:
+          storage: 1Gi
+
+  templates:
+  - name: poc-volume-workflow
+    steps:
+    - - name: poc-volume-import
+        template: poc-volume-import
+        arguments:
+          parameters:
+          - name: dataset-source
+            value: "{{workflow.parameters.dataset-source}}"
+    - - name: poc-volume-parser
+        template: poc-volume-parser
+    - - name: poc-volume-persist
+        template: poc-volume-persist
+
+  - name: poc-volume-import
+    inputs:
+      parameters:
+      - name: dataset-source
+    container:
+      image:  masalinasgancedo/poc-volume-import
+      command: [python3]
+      args: ["import.py", "{{inputs.parameters.dataset-source}}"] 
+      volumeMounts:
+        - name: dataset-workdir
+          mountPath: /mnt/dataset
+
+  - name: poc-volume-parser
+    container:
+      image:  masalinasgancedo/poc-volume-parser
+      command: [python3]
+      args: ["parser.py"]    
+      volumeMounts:
+        - name: dataset-workdir
+          mountPath: /mnt/dataset
+
+  - name: poc-volume-persist
+    container:
+      image:  masalinasgancedo/poc-volume-persist
+      command: [python3]
+      args: ["persist.py"]        
+      volumeMounts:
+        - name: dataset-workdir
+          mountPath: /mnt/dataset      

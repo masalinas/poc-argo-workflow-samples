@@ -1,9 +1,9 @@
 apiVersion: argoproj.io/v1alpha1
 kind: Workflow
 metadata:
-  generateName: poc-workflow-
+  generateName: poc-artifact-workflow-
 spec:
-  entrypoint: poc-workflow
+  entrypoint: poc-artifact-workflow
   podGC:
     # Pod GC strategy must be one of the following:
     # * OnPodCompletion - delete pods immediately when pod is completed (including errors/failures)
@@ -16,33 +16,33 @@ spec:
     - name: dataset-source
 
   templates:
-  - name: poc-workflow
+  - name: poc-artifact-workflow
     steps:
-    - - name: poc-import
-        template: poc-import
+    - - name: poc-artifact-import
+        template: poc-artifact-import
         arguments:
           parameters:
           - name: dataset-source
             value: "{{workflow.parameters.dataset-source}}"        
-    - - name: poc-parser
-        template: poc-parser
+    - - name: poc-artifact-parser
+        template: poc-artifact-parser
         arguments:
           artifacts:
           - name: dataset-csv
-            from: "{{steps.poc-import.outputs.artifacts.dataset-csv}}"
-    - - name: poc-persist
-        template: poc-persist
+            from: "{{steps.poc-artifact-import.outputs.artifacts.dataset-csv}}"
+    - - name: poc-artifact-persist
+        template: poc-artifact-persist
         arguments:
           artifacts:
           - name: dataset-json
-            from: "{{steps.poc-parser.outputs.artifacts.dataset-json}}"
+            from: "{{steps.poc-artifact-parser.outputs.artifacts.dataset-json}}"
 
-  - name: poc-import
+  - name: poc-artifact-import
     inputs:
       parameters:
       - name: dataset-source
     container:
-      image:  masalinasgancedo/poc-import
+      image:  masalinasgancedo/poc-artifact-import
       command: [python3]
       args: ["import.py", "{{inputs.parameters.dataset-source}}"] 
     outputs:
@@ -50,13 +50,13 @@ spec:
       - name: dataset-csv
         path: /app/covid-19.csv
 
-  - name: poc-parser
+  - name: poc-artifact-parser
     inputs:
       artifacts:
       - name: dataset-csv
         path: /app/covid-19.csv
     container:
-      image:  masalinasgancedo/poc-parser
+      image:  masalinasgancedo/poc-artifact-parser
       command: [python3]
       args: ["parser.py", "covid-19.csv"]
     outputs:
@@ -64,12 +64,12 @@ spec:
       - name: dataset-json
         path: /app/covid-19.json
 
-  - name: poc-persist
+  - name: poc-artifact-persist
     inputs:
       artifacts:
       - name: dataset-json
         path: /app/covid-19.json
     container:
-      image:  masalinasgancedo/poc-persist
+      image:  masalinasgancedo/poc-artifact-persist
       command: [python3]
       args: ["persist.py", "covid-19.json"]        
