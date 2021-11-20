@@ -138,10 +138,6 @@ Using argo workflow volume architecture
 argo -n argo submit --watch poc-volume-workflow.yaml -p dataset-source="https://raw.githubusercontent.com/ec-jrc/COVID-19/master/data-by-country/jrc-covid-19-countries-latest.csv"
 ```
 
-Argo Workflow executed
-
-![PoC Workflow](captures/poc-flow.png "PoC Workflow")
-
 Docker Hubs Containers
 
 ![Dockerhub Containers](captures/dockerhub-containers.png "Dockerhub Containers")
@@ -154,6 +150,10 @@ Minio Bucket folders created by the PoC Argo Workflow
 
 ![Minio Bucket](captures/minio-bucket.png "Minio Bucket")
 
-Sample persisted in MongoDB
+Argo Workflow executed
+
+![PoC Workflow](captures/poc-flow.png "PoC Workflow")
+
+Result sample persisted in MongoDB
 
 ![Sample persisted](captures/database-persist.png "Sample persisted")
