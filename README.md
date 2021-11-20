@@ -154,6 +154,8 @@ argo -n argo submit --watch poc-volume-workflow.yaml -p dataset-source="https://
 
 ![PoC Workflow](captures/poc-flow.png "PoC Workflow")
 
+![PoC Workflow](captures/workflow-times.png "PoC Workflow")
+
 - Result sample persisted in MongoDB
 
 ![Sample persisted](captures/database-persist.png "Sample persisted")
