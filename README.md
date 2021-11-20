@@ -142,11 +142,11 @@ argo -n argo submit --watch poc-volume-workflow.yaml -p dataset-source="https://
 
 ![Dockerhub Containers](captures/dockerhub-containers.png "Dockerhub Containers")
 
-- Pods created by Poc Argo Workflow in Kubernetes
+- Pods created by Argo Workflow in Kubernetes
 
 ![Kubernetes Pods](captures/pods-flow.png "Kubernetes Pods")
 
-- Minio Bucket folders created by the PoC Argo Workflow
+- Minio Bucket folders created by the Argo Workflow
 
 ![Minio Bucket](captures/minio-bucket.png "Minio Bucket")
 
