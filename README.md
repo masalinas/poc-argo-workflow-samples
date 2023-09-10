@@ -33,6 +33,22 @@ kubectl apply -n argo -f https://raw.githubusercontent.com/argoproj/argo-workflo
 
 ![Deployment](captures/deployments.png "ArgoFlow Deployments")
 
+# Access to Argo Workflow dashboard
+
+Make a port-fordward of the argo-server port like this
+
+```shell
+kubectl -n argo port-forward deployment/argo-server 2746:2746
+```
+
+Open Argo Workflow dashboard Uri:
+
+```shell
+http://localhost:2746
+```
+
+![Argo Workflow UI](captures/argoworkflow-ui.png "Argo Workflow UI")
+
 # Install Argo Workflow CLI
 
 From Argo WorkFlow Dashboard we could download the CLI
@@ -54,21 +70,6 @@ argo version
 ```
 
 chmod +z 
-# Access to Argo Workflow dashboard
-
-Make a port-fordward of the argo-server port like this
-
-```shell
-kubectl -n argo port-forward deployment/argo-server 2746:2746
-```
-
-Open Argo Workflow dashboard Uri:
-
-```shell
-http://localhost:2746
-```
-
-![Argo Workflow UI](captures/argoworkflow-ui.png "Argo Workflow UI")
 
 # Access to Minio artifact repository
 
